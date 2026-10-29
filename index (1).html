@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abdul Hadi — Computer Science Student &amp; Sales Associate</title>
+<meta name="description" content="CV of Abdul Hadi: BS Computer Science student with 3+ years of real estate sales experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1B1646;          /* midnight indigo */
+    --ink-2: #2D2285;        /* deep violet */
+    --violet: #5B4BDB;       /* interactive violet */
+    --violet-2: #7C5CF0;
+    --accent: #22D3C5;       /* aqua accent */
+    --accent-soft: #D9F8F4;
+    --paper: #F3F2FC;
+    --card: #FFFFFF;
+    --lav: #ECE9FD;          /* soft lavender tint */
+    --line: #DEDAF5;
+    --text: #25214F;
+    --muted: #6A6797;
+    --on-ink: #EEEBFF;
+    --on-ink-muted: #BDB8EE;
+    --ease: cubic-bezier(.2,.8,.2,1);
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(900px 520px at 100% 0%, rgba(34,211,197,.16), transparent 62%),
+      radial-gradient(800px 620px at 0% 100%, rgba(91,75,219,.14), transparent 62%),
+      var(--paper);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif; color: var(--ink); letter-spacing: -0.015em; }
+  ul { list-style: none; padding: 0; }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+  .icon { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Layout ---------- */
+  .shell {
+    max-width: 1140px; margin: 0 auto; padding: 32px 24px 24px;
+    display: grid; grid-template-columns: 350px minmax(0, 1fr); gap: 28px; align-items: start;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .profile {
+    position: sticky; top: 32px;
+    background: linear-gradient(165deg, var(--ink) 0%, var(--ink-2) 58%, #4B34C7 100%);
+    color: var(--on-ink);
+    border-radius: 28px; padding: 28px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(45,34,133,.28);
+    animation: settle .8s var(--ease) both;
+  }
+  .profile::before {
+    content: ""; position: absolute; width: 280px; height: 280px; right: -100px; top: -100px;
+    background: radial-gradient(circle, rgba(34,211,197,.38), transparent 70%);
+    pointer-events: none;
+  }
+  .profile > * { position: relative; }
+  .photo {
+    position: relative; aspect-ratio: 4 / 4.6;
+    border-radius: 20px; overflow: hidden; background: rgba(255,255,255,.08);
+    outline: 2px solid var(--accent); outline-offset: 5px;
+    display: grid; place-items: center;
+    margin: 5px 5px 26px; width: calc(100% - 10px);
+  }
+  .photo .initials {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 64px; color: var(--accent); letter-spacing: -0.02em;
+  }
+  .photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    transition: transform .8s var(--ease);
+  }
+  .photo:hover img { transform: scale(1.04); }
+  .available {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--on-ink);
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 14px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ADE9B; animation: pulse 2.2s infinite; }
+  .profile h1 { color: #fff; font-size: 38px; line-height: 1.05; font-weight: 700; }
+  .role { margin-top: 8px; color: var(--accent); font-weight: 600; font-size: 16px; }
+  .where { margin-top: 6px; display: flex; align-items: center; gap: 6px; color: var(--on-ink-muted); font-size: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 24px 0; padding: 18px 0; border-block: 1px solid rgba(255,255,255,.16); }
+  .stat b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 26px; line-height: 1.1; color: #fff; font-weight: 700; }
+  .stat span { font-size: 12.5px; color: var(--on-ink-muted); line-height: 1.3; display: block; margin-top: 2px; }
+
+  .contact-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .contact-link {
+    flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px; border-radius: 14px;
+    background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.14);
+    font-size: 14px; transition: background .2s, border-color .2s, transform .2s var(--ease);
+  }
+  .contact-link span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .contact-link:hover { background: rgba(255,255,255,.16); border-color: var(--accent); }
+  .contact-link:active { transform: scale(.98); }
+  .copy {
+    width: 44px; height: 44px; border-radius: 14px; flex: none;
+    display: grid; place-items: center; position: relative;
+    background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.14);
+    transition: background .2s, transform .2s var(--ease);
+  }
+  .copy:hover { background: rgba(255,255,255,.16); }
+  .copy:active { transform: scale(.92); }
+  .copy .icon { position: absolute; transition: transform .35s var(--ease), opacity .25s; }
+  .copy .i-check { opacity: 0; transform: scale(.4) rotate(-40deg); color: #4ADE9B; }
+  .copy.done .i-copy { opacity: 0; transform: scale(.4) rotate(40deg); }
+  .copy.done .i-check { opacity: 1; transform: scale(1) rotate(0); }
+
+  .btn {
+    position: relative; overflow: hidden;
+    width: 100%; margin-top: 8px; padding: 13px 18px; border-radius: 14px;
+    display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px;
+    background: linear-gradient(135deg, var(--accent), #5EEAD4); color: var(--ink);
+    transition: transform .2s var(--ease), box-shadow .2s;
+  }
+  .btn:hover { box-shadow: 0 10px 26px rgba(34,211,197,.4); transform: translateY(-1px); }
+  .btn:active { transform: scale(.97); }
+  .ripple { position: absolute; border-radius: 50%; background: var(--rip, rgba(27,22,70,.25)); transform: scale(0); animation: ripple .65s linear; pointer-events: none; }
+
+  /* ---------- Main ---------- */
+  main { animation: settle .8s .12s var(--ease) both; min-width: 0; }
+  .tabs-wrap { overflow-x: auto; padding: 2px 2px 8px; margin: 0 -2px 10px; scrollbar-width: none; }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+  .tabs {
+    position: relative; display: inline-flex; gap: 2px; padding: 5px;
+    background: #fff; border: 1px solid var(--line); border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(45,34,133,.08);
+  }
+  .tab {
+    position: relative; overflow: hidden; z-index: 1; padding: 10px 22px; border-radius: 14px;
+    font-weight: 600; font-size: 15px; color: var(--muted); white-space: nowrap;
+    transition: color .3s, transform .2s var(--ease);
+    --rip: rgba(255,255,255,.45);
+  }
+  .tab:hover { color: var(--violet); }
+  .tab:active { transform: scale(.95); }
+  .tab[aria-selected="true"] { color: #fff; }
+  .indicator {
+    position: absolute; top: 5px; left: 0; height: calc(100% - 10px);
+    background: linear-gradient(135deg, var(--violet), var(--violet-2));
+    border-radius: 14px; box-shadow: 0 8px 18px rgba(91,75,219,.4);
+    transition: transform .55s var(--ease), width .55s var(--ease);
+  }
+
+  /* ---------- Panel switching ---------- */
+  .stage { position: relative; }
+  .panel.out-l { animation: outL .26s cubic-bezier(.4,0,1,1) both; }
+  .panel.out-r { animation: outR .26s cubic-bezier(.4,0,1,1) both; }
+  .panel.enter .card, .panel.enter .acc { animation: inR .65s var(--ease) both; animation-delay: calc(var(--c, 0) * 100ms); }
+  .panel.enter.from-l .card, .panel.enter.from-l .acc { animation-name: inL; }
+  .panel.enter li { animation: rise .5s var(--ease) both; animation-delay: calc(min(var(--i, 0), 10) * 50ms + 260ms); }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 24px;
+    padding: 26px 28px; margin-bottom: 16px;
+    box-shadow: 0 8px 28px rgba(45,34,133,.06);
+  }
+  .card > h2 { font-size: 22px; margin-bottom: 14px; font-weight: 600; }
+
+  /* Goal statement */
+  .goal {
+    position: relative; overflow: hidden; border: 0; color: var(--on-ink);
+    background: linear-gradient(135deg, var(--violet) 0%, var(--ink-2) 100%);
+    box-shadow: 0 18px 40px rgba(91,75,219,.32);
+  }
+  .goal::after {
+    content: ""; position: absolute; width: 220px; height: 220px; right: -70px; bottom: -90px;
+    background: radial-gradient(circle, rgba(34,211,197,.45), transparent 70%); pointer-events: none;
+  }
+  .goal h2 { color: var(--accent); font-size: 17px; margin-bottom: 8px; }
+  .goal p { position: relative; z-index: 1; font-family: "Bricolage Grotesque", sans-serif; font-size: 22px; line-height: 1.4; color: #fff; font-weight: 500; letter-spacing: -0.01em; }
+
+  /* Bullets */
+  .bullets li { position: relative; padding-left: 24px; margin: 9px 0; font-size: 16px; }
+  .bullets li::before {
+    content: ""; position: absolute; left: 3px; top: .62em; width: 8px; height: 8px;
+    background: linear-gradient(135deg, var(--violet), var(--accent)); border-radius: 2px; transform: rotate(45deg);
+    transition: transform .3s var(--ease);
+  }
+  .bullets li:hover::before { transform: rotate(225deg) scale(1.3); }
+  .bullets.two { display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; }
+
+  /* Accordion */
+  .acc { background: var(--card); border: 1px solid var(--line); border-radius: 22px; margin-bottom: 14px; overflow: hidden; box-shadow: 0 8px 28px rgba(45,34,133,.06); transition: border-color .25s, box-shadow .3s; }
+  .acc:hover { border-color: #C5BEF2; }
+  .acc.open { border-color: var(--violet); box-shadow: 0 14px 36px rgba(91,75,219,.16); }
+  .acc-head { width: 100%; display: flex; align-items: center; gap: 16px; padding: 20px 24px; text-align: left; }
+  .acc-badge {
+    width: 46px; height: 46px; border-radius: 14px; flex: none; display: grid; place-items: center;
+    background: var(--lav); color: var(--violet); transition: background .3s, color .3s, transform .4s var(--ease);
+  }
+  .acc.open .acc-badge { background: linear-gradient(135deg, var(--violet), var(--violet-2)); color: #fff; transform: rotate(-6deg) scale(1.05); }
+  .acc-title { flex: 1; min-width: 0; }
+  .acc-title h3 { font-size: 19px; font-weight: 600; line-height: 1.25; }
+  .acc-title p { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .chev { width: 22px; height: 22px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s var(--ease); flex: none; }
+  .acc.open .chev { transform: rotate(180deg); stroke: var(--violet); }
+  .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+  .acc.open .acc-body { grid-template-rows: 1fr; }
+  .acc-inner { overflow: hidden; }
+  .acc-inner .bullets { padding: 0 24px 22px 86px; opacity: 0; transform: translateY(-6px); transition: opacity .35s .1s, transform .45s .05s var(--ease); }
+  .acc.open .acc-inner .bullets { opacity: 1; transform: none; }
+  .tag { display: inline-block; font-size: 12.5px; font-weight: 600; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: #0B7A71; margin-left: 8px; vertical-align: middle; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .skills-grid .card { margin: 0; }
+
+  footer { max-width: 1140px; margin: 0 auto; padding: 8px 24px 32px; color: var(--muted); font-size: 14px; text-align: center; }
+
+  /* Toast */
+  .toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 24px); opacity: 0; pointer-events: none;
+    background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 14px; font-size: 14.5px; font-weight: 500;
+    display: flex; align-items: center; gap: 10px; box-shadow: 0 14px 34px rgba(27,22,70,.35);
+    transition: opacity .3s, transform .45s var(--ease); z-index: 20;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast .icon { color: #4ADE9B; }
+
+  /* ---------- Animations ---------- */
+  @keyframes settle { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes outL { to { opacity: 0; transform: translateX(-48px) scale(.97); filter: blur(4px); } }
+  @keyframes outR { to { opacity: 0; transform: translateX(48px) scale(.97); filter: blur(4px); } }
+  @keyframes inR { from { opacity: 0; transform: translateX(70px) scale(.96); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+  @keyframes inL { from { opacity: 0; transform: translateX(-70px) scale(.96); filter: blur(5px); } to { opacity: 1; transform: none; filter: blur(0); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,155,.6); } 70% { box-shadow: 0 0 0 8px rgba(74,222,155,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,155,0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 940px) {
+    .shell { grid-template-columns: 1fr; padding: 16px 16px 8px; gap: 20px; }
+    .profile { position: static; padding: 24px; }
+    .photo { max-width: 320px; margin-inline: auto; margin-bottom: 26px; }
+  }
+  @media (max-width: 620px) {
+    .skills-grid, .bullets.two { grid-template-columns: 1fr; }
+    .card { padding: 22px; }
+    .goal p { font-size: 19px; }
+    .acc-head { padding: 18px; gap: 12px; }
+    .acc-inner .bullets { padding: 0 18px 20px 24px; }
+    .profile h1 { font-size: 34px; }
+    .tab { padding: 10px 16px; }
+  }
+
+  /* ---------- Print: all sections in one flow ---------- */
+  @media print {
+    body { background: #fff; }
+    .shell { display: block; padding: 0; }
+    .profile, .goal, .acc.open .acc-badge, .indicator { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .profile { position: static; border-radius: 0; margin-bottom: 16px; box-shadow: none; }
+    .tabs-wrap, .copy, .btn, .toast, .chev { display: none !important; }
+    .panel[hidden] { display: block !important; }
+    .panel .card, .panel .acc, .panel li { animation: none !important; opacity: 1 !important; filter: none !important; }
+    .acc-body { grid-template-rows: 1fr !important; }
+    .acc-inner .bullets { opacity: 1 !important; transform: none !important; }
+    .card, .acc { break-inside: avoid; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 13h18"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H20v14H5.5A1.5 1.5 0 0 0 4 19.5v-14Z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+</svg>
+
+<div class="shell">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="profile" aria-label="Contact and summary">
+    <div class="photo">
+      <span class="initials" aria-hidden="true">AH</span>
+      <!-- Place your photo in the same folder as this file -->
+      <img src="f25641c6-6864-40a4-b239-80b8280c3d97.jpg" alt="Portrait of Abdul Hadi" onerror="this.remove()">
+    </div>
+
+    <span class="available"><span class="dot"></span>Available for opportunities</span>
+    <h1>Abdul Hadi</h1>
+    <p class="role">Computer Science Student &amp; Sales Associate</p>
+    <p class="where"><svg class="icon"><use href="#i-pin"/></svg>Lahore, Pakistan</p>
+
+    <div class="stats">
+      <div class="stat"><b><span data-count="3">3</span>+</b><span>Years in sales</span></div>
+      <div class="stat"><b><span data-count="2">2</span></b><span>Languages</span></div>
+      <div class="stat"><b>BSCS</b><span>In progress</span></div>
+    </div>
+
+    <div class="contact-row">
+      <a class="contact-link" href="mailto:abdulhadi71917@hotmail.com">
+        <svg class="icon"><use href="#i-mail"/></svg><span>abdulhadi71917@hotmail.com</span>
+      </a>
+      <button class="copy" data-copy="abdulhadi71917@hotmail.com" data-msg="Email copied" aria-label="Copy email address">
+        <svg class="icon i-copy"><use href="#i-copy"/></svg>
+        <svg class="icon i-check"><use href="#i-check"/></svg>
+      </button>
+    </div>
+    <div class="contact-row">
+      <a class="contact-link" href="tel:+923304242591">
+        <svg class="icon"><use href="#i-phone"/></svg><span>+92 330 4242591</span>
+      </a>
+      <button class="copy" data-copy="+92 330 4242591" data-msg="Phone number copied" aria-label="Copy phone number">
+        <svg class="icon i-copy"><use href="#i-copy"/></svg>
+        <svg class="icon i-check"><use href="#i-check"/></svg>
+      </button>
+    </div>
+
+    <button class="btn" id="saveCv"><svg class="icon"><use href="#i-download"/></svg>Save CV as PDF</button>
+  </aside>
+
+  <!-- ===== Main content ===== -->
+  <main>
+    <div class="tabs-wrap">
+      <div class="tabs" role="tablist" aria-label="CV sections">
+        <span class="indicator" aria-hidden="true"></span>
+        <button class="tab" role="tab" id="t-profile" aria-controls="p-profile" aria-selected="true">Profile</button>
+        <button class="tab" role="tab" id="t-exp" aria-controls="p-exp" aria-selected="false" tabindex="-1">Experience</button>
+        <button class="tab" role="tab" id="t-edu" aria-controls="p-edu" aria-selected="false" tabindex="-1">Education</button>
+        <button class="tab" role="tab" id="t-skills" aria-controls="p-skills" aria-selected="false" tabindex="-1">Skills</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <!-- Profile -->
+      <section class="panel enter" role="tabpanel" id="p-profile" aria-labelledby="t-profile">
+        <div class="card goal">
+          <h2>My goal</h2>
+          <p>To be part of a professional team where I can use my knowledge to benefit the company in the long term and keep growing my professional skills.</p>
+        </div>
+        <div class="card">
+          <h2>Languages</h2>
+          <ul class="bullets two">
+            <li>Urdu</li>
+            <li>English</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="panel" role="tabpanel" id="p-exp" aria-labelledby="t-exp" hidden>
+        <div class="acc open">
+          <button class="acc-head" aria-expanded="true">
+            <span class="acc-badge"><svg class="icon"><use href="#i-briefcase"/></svg></span>
+            <span class="acc-title">
+              <h3>Sales Associate<span class="tag">3 years</span></h3>
+              <p>Real estate industry</p>
+            </span>
+            <svg class="chev"><use href="#i-chev"/></svg>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <ul class="bullets">
+              <li>Managed day-to-day sales responsibilities</li>
+              <li>Handled client communication</li>
+              <li>Analysed client requirements</li>
+              <li>Led property consultations</li>
+            </ul>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="panel" role="tabpanel" id="p-edu" aria-labelledby="t-edu" hidden>
+        <div class="acc open">
+          <button class="acc-head" aria-expanded="true">
+            <span class="acc-badge"><svg class="icon"><use href="#i-cap"/></svg></span>
+            <span class="acc-title">
+              <h3>BS Computer Science<span class="tag">Current</span></h3>
+              <p>Qarshi University</p>
+            </span>
+            <svg class="chev"><use href="#i-chev"/></svg>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <ul class="bullets">
+              <li>Software development fundamentals</li>
+              <li>Analytical thinking</li>
+              <li>Core programming concepts</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-badge"><svg class="icon"><use href="#i-book"/></svg></span>
+            <span class="acc-title">
+              <h3>Intermediate</h3>
+              <p>BISE Lahore · 2021 – 2023</p>
+            </span>
+            <svg class="chev"><use href="#i-chev"/></svg>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <ul class="bullets">
+              <li>Board of Intermediate and Secondary Education, Lahore</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-head" aria-expanded="false">
+            <span class="acc-badge"><svg class="icon"><use href="#i-book"/></svg></span>
+            <span class="acc-title">
+              <h3>Matriculation</h3>
+              <p>BISE Lahore · 2019 – 2021</p>
+            </span>
+            <svg class="chev"><use href="#i-chev"/></svg>
+          </button>
+          <div class="acc-body"><div class="acc-inner">
+            <ul class="bullets">
+              <li>Board of Intermediate and Secondary Education, Lahore</li>
+            </ul>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="panel" role="tabpanel" id="p-skills" aria-labelledby="t-skills" hidden>
+        <div class="skills-grid">
+          <div class="card">
+            <h2>Technical</h2>
+            <ul class="bullets">
+              <li>C++</li>
+              <li>Java</li>
+              <li>JavaScript</li>
+              <li>Software development</li>
+              <li>Problem-solving</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h2>Professional</h2>
+            <ul class="bullets">
+              <li>Sales and client management</li>
+              <li>Negotiation and persuasion</li>
+              <li>Business communication</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Interests</h2>
+          <ul class="bullets two">
+            <li>Reading</li>
+            <li>Badminton</li>
+            <li>Cricket</li>
+            <li>Snooker</li>
+            <li>Padel tennis</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<footer>© 2026 Abdul Hadi</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="icon"><use href="#i-check"/></svg><span></span></div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Tabs: sliding indicator + directional page transition ---- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var indicator = document.querySelector('.indicator');
+  var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+  var current = 0, timer = null;
+
+  function moveIndicator(tab) {
+    indicator.style.width = tab.offsetWidth + 'px';
+    indicator.style.transform = 'translateX(' + tab.offsetLeft + 'px)';
+  }
+  function prepare(panel) {
+    panel.querySelectorAll('.card, .acc').forEach(function (c, i) { c.style.setProperty('--c', i); });
+    panel.querySelectorAll('li').forEach(function (li, i) { li.style.setProperty('--i', i); });
+  }
+  function reveal(panel, dir) {
+    prepare(panel);
+    panel.classList.remove('enter', 'from-r', 'from-l', 'out-l', 'out-r');
+    panel.hidden = false;
+    void panel.offsetWidth;                       // restart animations
+    panel.classList.add('enter', dir < 0 ? 'from-l' : 'from-r');
+  }
+  function select(tab, focus) {
+    var to = tabs.indexOf(tab);
+    if (to === current) { if (focus) tab.focus(); return; }
+    var from = current, dir = to > from ? 1 : -1;
+    current = to;
+
+    tabs.forEach(function (t, i) {
+      t.setAttribute('aria-selected', i === to);
+      t.tabIndex = i === to ? 0 : -1;
+    });
+    moveIndicator(tab);
+    tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    if (focus) tab.focus();
+
+    clearTimeout(timer);
+    panels.forEach(function (p, i) {              // tidy any panel mid-transition
+      if (i !== from && i !== to) { p.hidden = true; p.className = 'panel'; }
+    });
+    var out = panels[from], inn = panels[to];
+    if (reduce) { out.hidden = true; out.className = 'panel'; reveal(inn, dir); return; }
+    out.classList.remove('enter', 'from-r', 'from-l');
+    out.classList.add(dir > 0 ? 'out-l' : 'out-r');
+    timer = setTimeout(function () {
+      out.hidden = true; out.className = 'panel';
+      reveal(inn, dir);
+    }, 250);
+  }
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function (e) { addRipple(tab, e); select(tab); });
+    tab.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+      if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (e.key === 'Home') n = tabs[0];
+      if (e.key === 'End') n = tabs[tabs.length - 1];
+      if (n) { e.preventDefault(); select(n, true); }
+    });
+  });
+  prepare(panels[0]);
+  panels[0].classList.add('from-r');
+  moveIndicator(tabs[0]);
+  window.addEventListener('resize', function () { moveIndicator(tabs[current]); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { moveIndicator(tabs[current]); });
+  }
+
+  /* ---- Accordion ---- */
+  document.querySelectorAll('.acc-head').forEach(function (head) {
+    head.addEventListener('click', function () {
+      var acc = head.parentElement;
+      var open = acc.classList.toggle('open');
+      head.setAttribute('aria-expanded', open);
+    });
+  });
+
+  /* ---- Count-up numbers (one-time, on load) ---- */
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    var target = +el.dataset.count;
+    if (reduce) { el.textContent = target; return; }
+    var start = null, dur = 1200;
+    el.textContent = '0';
+    function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    setTimeout(function () { requestAnimationFrame(step); }, 500);
+  });
+
+  /* ---- Toast + copy ---- */
+  var toast = document.getElementById('toast'), toastTimer;
+  function showToast(msg) {
+    toast.querySelector('span').textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2000);
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.dataset.copy;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(function () { fallbackCopy(text); });
+      } else { fallbackCopy(text); }
+      btn.classList.add('done');
+      showToast(btn.dataset.msg);
+      setTimeout(function () { btn.classList.remove('done'); }, 1800);
+    });
+  });
+
+  /* ---- Ripple (buttons and tabs) ---- */
+  function addRipple(el, e) {
+    if (reduce) return;
+    var r = el.getBoundingClientRect(), size = Math.max(r.width, r.height);
+    var s = document.createElement('span');
+    s.className = 'ripple';
+    s.style.width = s.style.height = size + 'px';
+    s.style.left = ((e.clientX || r.left + r.width / 2) - r.left - size / 2) + 'px';
+    s.style.top = ((e.clientY || r.top + r.height / 2) - r.top - size / 2) + 'px';
+    el.appendChild(s);
+    setTimeout(function () { s.remove(); }, 700);
+  }
+  document.querySelectorAll('.btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) { addRipple(btn, e); });
+  });
+  document.getElementById('saveCv').addEventListener('click', function () {
+    setTimeout(function () { window.print(); }, 250);
+  });
+})();
+</script>
+</body>
+</html>
